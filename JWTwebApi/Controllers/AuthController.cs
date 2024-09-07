@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using JWTwebApi.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWTwebApi.Controllers
@@ -7,6 +8,6 @@ namespace JWTwebApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
+        public static User user = new User();
     }
 }
