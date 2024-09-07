@@ -9,5 +9,18 @@ namespace JWTwebApi.Controllers
     public class AuthController : ControllerBase
     {
         public static User user = new User();
+
+        [HttpPost("register")]
+        public ActionResult<User> Register(UserDto request)
+        {
+            string passwordHash
+                = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+            user.UserName = request.UserName;
+            user.PassWordHash = passwordHash;
+
+            return Ok(user);
+        }
+
     }
 }
