@@ -17,7 +17,23 @@ namespace JWTwebApi.Controllers
                 = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             user.UserName = request.UserName;
-            user.PassWordHash = passwordHash;
+            user.PasswordHash = passwordHash;
+
+            return Ok(user);
+        }
+        
+        [HttpPost("login")]
+        public ActionResult<User> Login(UserDto request)
+        {
+            if(user.UserName != request.UserName)
+            {
+                return BadRequest("User not found.");
+            }
+
+            if(!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+            {
+                return BadRequest("Wrong password.");
+            }
 
             return Ok(user);
         }
